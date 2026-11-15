@@ -99,15 +99,28 @@
         .meme-content h2 { font-family: 'Unbounded', sans-serif; font-size: clamp(2rem, 5vw, 4rem); text-transform: uppercase; font-weight: 900; color: #fff; text-shadow: 0 0 20px rgba(0,0,0,0.8); margin-bottom: 20px; letter-spacing: -1px; }
         .meme-content p { font-size: clamp(1.2rem, 3vw, 2rem); color: #fff; font-weight: 500; letter-spacing: 5px; text-transform: uppercase; text-shadow: 0 0 10px rgba(0,0,0,0.8); }
 
-        /* --- МОБИЛЬНАЯ АДАПТАЦИЯ --- */
+        /* --- МОБИЛЬНАЯ АДАПТАЦИЯ (ТУТ УМЕНЬШАЕМ ОТСТУПЫ) --- */
         @media (max-width: 768px) {
             .name-part { font-size: 14.5vw; letter-spacing: -1px; }
             .date-block { letter-spacing: 8px; margin-left: 8px; font-size: 0.8rem; }
             .go-btn { padding: 15px 40px; font-size: 1.2rem; margin-top: 40px; }
             .audio-toggle { top: 20px; right: 20px; width: 40px; height: 40px; }
             
-            .photo-wrapper img { object-fit: contain; background-color: #050505; }
-            .photo-wrapper img, .photo-wrapper img.vertical { object-fit: contain; }
+            /* УМЕНЬШАЕМ ВЫСОТУ БЛОКА ДО 65% ОТ ЭКРАНА */
+            .photo-item { 
+                height: 65vh; 
+                padding: 1vh 2vw; /* Убираем почти все отступы внутри */
+            }
+            .gallery { 
+                padding-top: 20px; /* Чуть отступаем от первого экрана */
+                padding-bottom: 20px;
+            }
+
+            /* ФОТО ЗАНИМАЕТ ВСЁ МЕСТО ВНУТРИ БЛОКА */
+            .photo-wrapper img { 
+                object-fit: cover; /* Возвращаем заполнение по краям */
+                background-color: transparent;
+            }
             
             .photo-number { font-size: 1.5rem; top: 15px; right: 15px; }
         }
@@ -424,32 +437,6 @@
                 heroContent.style.opacity = 1 - (scrollY / (window.innerHeight * 0.6));
                 heroContent.style.filter = `blur(${scrollY * 0.02}px)`;
             }
-        });
-
-        // --- ФИКС ПОВОРОТА ЭКРАНА ---
-        // Эта функция запоминает, на каком фото мы остановились, и возвращает нас туда
-        let resizeTimeout;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                // Находим элемент, который находится ровно по центру экрана
-                const allSections = document.querySelectorAll('.hero, .photo-item, .footer, .meme-section');
-                let currentSection = null;
-
-                allSections.forEach(section => {
-                    const rect = section.getBoundingClientRect();
-                    // Если верх элемента близко к верху экрана (с погрешностью)
-                    if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
-                        currentSection = section;
-                    }
-                });
-
-                // Если нашли нужный блок — принудительно скроллим к нему
-                if (currentSection) {
-                    // Используем 'auto' (мгновенно), чтобы не было диких прыжков при анимации
-                    currentSection.scrollIntoView({ behavior: 'auto', block: 'center' });
-                }
-            }, 200); // Ждем 200мс, чтобы браузер успел перестроить интерфейс
         });
     </script>
 </body>
