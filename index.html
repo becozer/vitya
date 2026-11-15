@@ -3,100 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Наше мероприятие</title>
+    <title>Виктор Хохолков | 13-14.11.26</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
+        /* Базовые настройки */
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0f0f0f; /* Темный фон для контраста */
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Экран приветствия */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-        }
-        header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 40px 20px;
-            margin-bottom: 30px;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2.5em;
-        }
-        header p {
-            margin-top: 10px;
-            font-size: 1.2em;
-            color: #bdc3c7;
-        }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin-bottom: 40px;
-        }
-        .gallery img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-        .gallery img:hover {
-            transform: scale(1.02);
-        }
-        .btn {
-            display: inline-block;
-            background-color: #e74c3c;
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 30px;
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-bottom: 40px;
-            transition: background-color 0.3s;
-        }
-        .btn:hover {
-            background-color: #c0392b;
-        }
-        footer {
-            margin-top: 50px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
             padding: 20px;
-            font-size: 0.9em;
-            color: #7f8c8d;
+            position: relative;
+        }
+        
+        /* Легкое свечение на фоне */
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            filter: blur(80px);
+            top: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #a0a0a0;
+            letter-spacing: 5px;
+            z-index: 1;
+        }
+
+        /* Анимация стрелочки вниз */
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            font-size: 2rem;
+            color: #555;
+            animation: bounce 2s infinite;
+            z-index: 1;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+        /* Зона с фотографиями */
+        .gallery-section {
+            background-color: #fafafa;
+            color: #111;
+            padding: 100px 20px;
+            min-height: 100vh;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .gallery-header h2 {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        .gallery-header p {
+            color: #777;
+            margin-top: 10px;
+        }
+
+        /* Сетка для фото */
+        .grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        /* Карточка фото */
+        .photo-card {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background-color: #eee;
+            aspect-ratio: 4 / 3; /* Квадратные/прямоугольные пропорции */
+            
+            /* Начальное состояние для анимации появления */
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        /* Класс, который добавляется через JS при прокрутке */
+        .photo-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            display: block;
+        }
+
+        .photo-card:hover img {
+            transform: scale(1.05); /* Легкий зум при наведении */
+        }
+
+        /* Финальный блок с кнопкой */
+        .final-section {
+            background-color: #0f0f0f;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .final-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .final-section p {
+            color: #a0a0a0;
+            margin-bottom: 40px;
+        }
+
+        .btn-yandex {
+            display: inline-block;
+            background-color: #ff0000; /* Красный Яндекс */
+            color: white;
+            padding: 18px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+        }
+
+        .btn-yandex:hover {
+            background-color: #d90000;
+            transform: translateY(-3px);
+        }
+
+        /* Адаптив для телефонов */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1rem; letter-spacing: 2px; }
+            .grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Фотоотчет: [Название мероприятия]</h1>
-        <p>Тут только избранные кадры. Остальное — по кнопке ниже.</p>
-    </header>
+    <!-- Первый экран -->
+    <section class="hero">
+        <h1>Виктор Хохолков</h1>
+        <p>13-14 / 11 / 26</p>
+        <div class="scroll-down">↓</div>
+    </section>
 
-    <div class="container">
-        <!-- Галерея -->
-        <div class="gallery">
-            <!-- Замени ссылки внутри src на свои. Если загружаешь фото на GitHub, просто положи их рядом с файлом index.html и напиши src="photo1.jpg" -->
-            <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=800" alt="Фото 1">
-            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=800" alt="Фото 2">
-            <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=800" alt="Фото 3">
-            <img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?q=80&w=800" alt="Фото 4">
+    <!-- Зона галереи -->
+    <section class="gallery-section">
+        <div class="gallery-header">
+            <h2>Избранные моменты</h2>
+            <p>Листай вниз, чтобы посмотреть</p>
         </div>
+        
+        <div class="grid">
+            <!-- 
+                ВАЖНО: Вставь свои ссылки на фото вместо этих. 
+                Если фото лежат в этом же репозитории, пиши src="image1.jpg" 
+            -->
+            <div class="photo-card"><img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=800" alt="Фото 1" loading="lazy"></div>
+            <div class="photo-card"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=800" alt="Фото 2" loading="lazy"></div>
+            <div class="photo-card"><img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=800" alt="Фото 3" loading="lazy"></div>
+            <div class="photo-card"><img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?q=80&w=800" alt="Фото 4" loading="lazy"></div>
+            <div class="photo-card"><img src="https://images.unsplash.com/photo-1530103862676-de8892bf309c?q=80&w=800" alt="Фото 5" loading="lazy"></div>
+            <div class="photo-card"><img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800" alt="Фото 6" loading="lazy"></div>
+            <!-- Добавляй остальные фото по аналогии (тебе нужно 30 штук) -->
+        </div>
+    </section>
 
-        <!-- Кнопка на Яндекс.Диск -->
-        <a href="ССЫЛКА_НА_ТВОЙ_ЯНДЕКС_ДИСК" class="btn" target="_blank">Смотреть ВСЕ фото на Яндекс.Диске</a>
-    </div>
+    <!-- Подвал с кнопкой -->
+    <section class="final-section">
+        <h2>Все фотографии</h2>
+        <p>Оригиналы и остальные кадры доступны на Яндекс.Диске</p>
+        <!-- Вставь свою ссылку на Яндекс.Диск ниже -->
+        <a href="ССЫЛКА_НА_ТВОЙ_ЯНДЕКС_ДИСК" class="btn-yandex" target="_blank">Открыть Яндекс.Диск</a>
+    </section>
 
-    <footer>
-        Сделано с любовью для друзей.
-    </footer>
+    <!-- Скрипт для анимации появления фото -->
+    <script>
+        const cards = document.querySelectorAll('.photo-card');
 
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Если хочешь, чтобы фото исчезали при прокрутке наверх, удали строку ниже
+                    // observer.unobserve(entry.target); 
+                }
+            });
+        }, {
+            threshold: 0.1 // Фото начнет появляться, когда покажется на 10%
+        });
+
+        cards.forEach(card => {
+            observer.observe(card);
+        });
+    </script>
 </body>
 </html>
