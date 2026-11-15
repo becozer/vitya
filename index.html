@@ -35,7 +35,7 @@
         
         .name-part { 
             font-family: 'Unbounded', sans-serif; 
-            font-size: 12vw; /* Чуть уменьшил для десктопа, чтобы точно влезало */
+            font-size: 12vw; 
             font-weight: 900; 
             line-height: 0.9; 
             text-transform: uppercase; 
@@ -48,7 +48,6 @@
             text-align: center;
         }
         
-        /* Убираем сильное смещение на мобилках, чтобы не обрезалось */
         .name-part.first { margin-bottom: -1vw; }
         .name-part.last { margin-top: -1vw; }
         
@@ -78,9 +77,7 @@
         .photo-wrapper { width: 100%; height: 100%; max-width: 1600px; position: relative; border-radius: 4px; overflow: hidden; background-color: #111; transform: scale(0.85); opacity: 0; filter: blur(10px); transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); display: flex; justify-content: center; align-items: center; }
         .photo-item.visible .photo-wrapper { transform: scale(1); opacity: 1; filter: blur(0); }
         
-        /* Фото по умолчанию заполняют экран (десктоп) */
         .photo-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.5s ease; }
-        /* Вертикальные фото вписываются целиком с черным фоном */
         .photo-wrapper img.vertical { object-fit: contain; background-color: #050505; }
         
         .photo-item:hover .photo-wrapper img { transform: scale(1.03); }
@@ -102,16 +99,14 @@
         .meme-content h2 { font-family: 'Unbounded', sans-serif; font-size: clamp(2rem, 5vw, 4rem); text-transform: uppercase; font-weight: 900; color: #fff; text-shadow: 0 0 20px rgba(0,0,0,0.8); margin-bottom: 20px; letter-spacing: -1px; }
         .meme-content p { font-size: clamp(1.2rem, 3vw, 2rem); color: #fff; font-weight: 500; letter-spacing: 5px; text-transform: uppercase; text-shadow: 0 0 10px rgba(0,0,0,0.8); }
 
-        /* --- МОБИЛЬНАЯ АДАПТАЦИЯ (ВСЁ, ЧТО НИЖЕ, РАБОТАЕТ ТОЛЬКО НА ТЕЛЕФОНАХ) --- */
+        /* --- МОБИЛЬНАЯ АДАПТАЦИЯ --- */
         @media (max-width: 768px) {
             .name-part { font-size: 14.5vw; letter-spacing: -1px; }
             .date-block { letter-spacing: 8px; margin-left: 8px; font-size: 0.8rem; }
             .go-btn { padding: 15px 40px; font-size: 1.2rem; margin-top: 40px; }
             .audio-toggle { top: 20px; right: 20px; width: 40px; height: 40px; }
             
-            /* НА ТЕЛЕФОНЕ ФОТО ВПИСЫВАЕМ ЦЕЛИКОМ, ЧТОБЫ НЕ ОБРЕЗАЛОСЬ */
             .photo-wrapper img { object-fit: contain; background-color: #050505; }
-            /* И для горизонтальных, и для вертикальных ставим contain на телефоне */
             .photo-wrapper img, .photo-wrapper img.vertical { object-fit: contain; }
             
             .photo-number { font-size: 1.5rem; top: 15px; right: 15px; }
@@ -133,7 +128,6 @@
         </svg>
     </div>
 
-    <!-- Первый экран -->
     <section class="hero" id="hero">
         <div class="hero-content">
             <div class="name-wrapper">
@@ -147,378 +141,232 @@
         <div class="scroll-line" id="scrollLine"></div>
     </section>
 
-    <!-- Галерея -->
     <section class="gallery">
         
-        <!-- 1. ПЕРВАЯ (73) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">01</span><img src="photo-73.jpg" alt="Фото 73" loading="lazy"></div>
         </div>
-
-        <!-- 2. (1) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">02</span><img src="photo-1.jpg" alt="Фото 1" loading="lazy"></div>
         </div>
-
-        <!-- 3. (3) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">03</span><img src="photo-3.jpg" alt="Фото 3" loading="lazy"></div>
         </div>
-
-        <!-- 4. ВЕРТИКАЛЬНАЯ (4) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">04</span><img src="photo-4.jpg" alt="Фото 4" class="vertical" loading="lazy"></div>
         </div>
-
-        <!-- 5. (5) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">05</span><img src="photo-5.jpg" alt="Фото 5" loading="lazy"></div>
         </div>
-
-        <!-- 6. (9) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">06</span><img src="photo-9.jpg" alt="Фото 9" loading="lazy"></div>
         </div>
-
-        <!-- 7. (10) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">07</span><img src="photo-10.jpg" alt="Фото 10" loading="lazy"></div>
         </div>
-
-        <!-- 8. (11) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">08</span><img src="photo-11.jpg" alt="Фото 11" loading="lazy"></div>
         </div>
-
-        <!-- 9. ВЕРТИКАЛЬНАЯ (12) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">09</span><img src="photo-12.jpg" alt="Фото 12" class="vertical" loading="lazy"></div>
         </div>
-
-        <!-- 10. (13) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">10</span><img src="photo-13.jpg" alt="Фото 13" loading="lazy"></div>
         </div>
-
-        <!-- 11. (15) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">11</span><img src="photo-15.jpg" alt="Фото 15" loading="lazy"></div>
         </div>
-
-        <!-- 12. (16) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">12</span><img src="photo-16.jpg" alt="Фото 16" loading="lazy"></div>
         </div>
-
-        <!-- 13. (17) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">13</span><img src="photo-17.jpg" alt="Фото 17" loading="lazy"></div>
         </div>
-
-        <!-- 14. (18) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">14</span><img src="photo-18.jpg" alt="Фото 18" loading="lazy"></div>
         </div>
-
-        <!-- 15. (19) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">15</span><img src="photo-19.jpg" alt="Фото 19" loading="lazy"></div>
         </div>
-
-        <!-- 16. (20) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">16</span><img src="photo-20.jpg" alt="Фото 20" loading="lazy"></div>
         </div>
-
-        <!-- 17. (21) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">17</span><img src="photo-21.jpg" alt="Фото 21" loading="lazy"></div>
         </div>
-
-        <!-- 18. (23) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">18</span><img src="photo-23.jpg" alt="Фото 23" loading="lazy"></div>
         </div>
-
-        <!-- 19. (24) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">19</span><img src="photo-24.jpg" alt="Фото 24" loading="lazy"></div>
         </div>
-
-        <!-- 20. (25) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">20</span><img src="photo-25.jpg" alt="Фото 25" loading="lazy"></div>
         </div>
-
-        <!-- 21. (26) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">21</span><img src="photo-26.jpg" alt="Фото 26" loading="lazy"></div>
         </div>
-
-        <!-- 22. (27) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">22</span><img src="photo-27.jpg" alt="Фото 27" loading="lazy"></div>
         </div>
-
-        <!-- 23. (28) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">23</span><img src="photo-28.jpg" alt="Фото 28" loading="lazy"></div>
         </div>
-
-        <!-- 24. (29) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">24</span><img src="photo-29.jpg" alt="Фото 29" loading="lazy"></div>
         </div>
-
-        <!-- 25. (30) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">25</span><img src="photo-30.jpg" alt="Фото 30" loading="lazy"></div>
         </div>
-
-        <!-- 26. (31) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">26</span><img src="photo-31.jpg" alt="Фото 31" loading="lazy"></div>
         </div>
-
-        <!-- 27. (32) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">27</span><img src="photo-32.jpg" alt="Фото 32" loading="lazy"></div>
         </div>
-
-        <!-- 28. (34) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">28</span><img src="photo-34.jpg" alt="Фото 34" loading="lazy"></div>
         </div>
-
-        <!-- 29. (36) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">29</span><img src="photo-36.jpg" alt="Фото 36" loading="lazy"></div>
         </div>
-
-        <!-- 30. (37) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">30</span><img src="photo-37.jpg" alt="Фото 37" loading="lazy"></div>
         </div>
-
-        <!-- 31. (38) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">31</span><img src="photo-38.jpg" alt="Фото 38" loading="lazy"></div>
         </div>
-
-        <!-- 32. (39) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">32</span><img src="photo-39.jpg" alt="Фото 39" loading="lazy"></div>
         </div>
-
-        <!-- 33. (40) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">33</span><img src="photo-40.jpg" alt="Фото 40" loading="lazy"></div>
         </div>
-
-        <!-- 34. (41) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">34</span><img src="photo-41.jpg" alt="Фото 41" loading="lazy"></div>
         </div>
-
-        <!-- 35. (43) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">35</span><img src="photo-43.jpg" alt="Фото 43" loading="lazy"></div>
         </div>
-
-        <!-- 36. (44) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">36</span><img src="photo-44.jpg" alt="Фото 44" loading="lazy"></div>
         </div>
-
-        <!-- 37. (46) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">37</span><img src="photo-46.jpg" alt="Фото 46" loading="lazy"></div>
         </div>
-
-        <!-- 38. (48) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">38</span><img src="photo-48.jpg" alt="Фото 48" loading="lazy"></div>
         </div>
-
-        <!-- 39. (49) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">39</span><img src="photo-49.jpg" alt="Фото 49" loading="lazy"></div>
         </div>
-
-        <!-- 40. (50) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">40</span><img src="photo-50.jpg" alt="Фото 50" loading="lazy"></div>
         </div>
-
-        <!-- 41. (54) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">41</span><img src="photo-54.jpg" alt="Фото 54" loading="lazy"></div>
         </div>
-
-        <!-- 42. (56) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">42</span><img src="photo-56.jpg" alt="Фото 56" loading="lazy"></div>
         </div>
-
-        <!-- 43. (58) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">43</span><img src="photo-58.jpg" alt="Фото 58" loading="lazy"></div>
         </div>
-
-        <!-- 44. (59) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">44</span><img src="photo-59.jpg" alt="Фото 59" loading="lazy"></div>
         </div>
-
-        <!-- 45. (60) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">45</span><img src="photo-60.jpg" alt="Фото 60" loading="lazy"></div>
         </div>
-
-        <!-- 46. (61) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">46</span><img src="photo-61.jpg" alt="Фото 61" loading="lazy"></div>
         </div>
-
-        <!-- 47. ВЕРТИКАЛЬНАЯ (62) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">47</span><img src="photo-62.jpg" alt="Фото 62" class="vertical" loading="lazy"></div>
         </div>
-
-        <!-- 48. (64) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">48</span><img src="photo-64.jpg" alt="Фото 64" loading="lazy"></div>
         </div>
-
-        <!-- 49. (65) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">49</span><img src="photo-65.jpg" alt="Фото 65" loading="lazy"></div>
         </div>
-
-        <!-- 50. (66) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">50</span><img src="photo-66.jpg" alt="Фото 66" loading="lazy"></div>
         </div>
-
-        <!-- 51. (67) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">51</span><img src="photo-67.jpg" alt="Фото 67" loading="lazy"></div>
         </div>
-
-        <!-- 52. (68) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">52</span><img src="photo-68.jpg" alt="Фото 68" loading="lazy"></div>
         </div>
-
-        <!-- 53. (69) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">53</span><img src="photo-69.jpg" alt="Фото 69" loading="lazy"></div>
         </div>
-
-        <!-- 54. (70) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">54</span><img src="photo-70.jpg" alt="Фото 70" loading="lazy"></div>
         </div>
-
-        <!-- 55. ВЕРТИКАЛЬНАЯ (75) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">55</span><img src="photo-75.jpg" alt="Фото 75" class="vertical" loading="lazy"></div>
         </div>
-
-        <!-- 56. (76) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">56</span><img src="photo-76.jpg" alt="Фото 76" loading="lazy"></div>
         </div>
-
-        <!-- 57. (77) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">57</span><img src="photo-77.jpg" alt="Фото 77" loading="lazy"></div>
         </div>
-
-        <!-- 58. (78) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">58</span><img src="photo-78.jpg" alt="Фото 78" loading="lazy"></div>
         </div>
-
-        <!-- 59. (80) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">59</span><img src="photo-80.jpg" alt="Фото 80" loading="lazy"></div>
         </div>
-
-        <!-- 60. (82) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">60</span><img src="photo-82.jpg" alt="Фото 82" loading="lazy"></div>
         </div>
-
-        <!-- 61. (83) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">61</span><img src="photo-83.jpg" alt="Фото 83" loading="lazy"></div>
         </div>
-
-        <!-- 62. (84) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">62</span><img src="photo-84.jpg" alt="Фото 84" loading="lazy"></div>
         </div>
-
-        <!-- 63. (85) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">63</span><img src="photo-85.jpg" alt="Фото 85" loading="lazy"></div>
         </div>
-
-        <!-- 64. (87) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">64</span><img src="photo-87.jpg" alt="Фото 87" loading="lazy"></div>
         </div>
-
-        <!-- 65. (88) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">65</span><img src="photo-88.jpg" alt="Фото 88" loading="lazy"></div>
         </div>
-
-        <!-- 66. (89) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">66</span><img src="photo-89.jpg" alt="Фото 89" loading="lazy"></div>
         </div>
-
-        <!-- 67. (93) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">67</span><img src="photo-93.jpg" alt="Фото 93" loading="lazy"></div>
         </div>
-
-        <!-- 68. (94) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">68</span><img src="photo-94.jpg" alt="Фото 94" loading="lazy"></div>
         </div>
-
-        <!-- 69. (96) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">69</span><img src="photo-96.jpg" alt="Фото 96" loading="lazy"></div>
         </div>
-
-        <!-- 70. (98) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">70</span><img src="photo-98.jpg" alt="Фото 98" loading="lazy"></div>
         </div>
-
-        <!-- 71. (99) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">71</span><img src="photo-99.jpg" alt="Фото 99" loading="lazy"></div>
         </div>
-
-        <!-- 72. САМАЯ ПОСЛЕДНЯЯ В ГАЛЕРЕЕ (91) -->
         <div class="photo-item">
             <div class="photo-wrapper"><span class="photo-number">72</span><img src="photo-91.jpg" alt="Фото 91" loading="lazy"></div>
         </div>
 
     </section>
 
-    <!-- Финальный экран -->
     <section class="footer">
         <h2>Все моменты здесь</h2>
         <a href="https://disk.yandex.ru/d/K-Npo42wlsG0SQ" class="btn" target="_blank">Яндекс.Диск</a>
     </section>
 
-    <!-- СЕКРЕТНЫЙ МЕМ (P.S.) с фото 52 -->
     <section class="meme-section">
         <img src="photo-52.jpg" class="meme-bg" alt="P.S. Мем">
         <div class="meme-content">
@@ -576,6 +424,32 @@
                 heroContent.style.opacity = 1 - (scrollY / (window.innerHeight * 0.6));
                 heroContent.style.filter = `blur(${scrollY * 0.02}px)`;
             }
+        });
+
+        // --- ФИКС ПОВОРОТА ЭКРАНА ---
+        // Эта функция запоминает, на каком фото мы остановились, и возвращает нас туда
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                // Находим элемент, который находится ровно по центру экрана
+                const allSections = document.querySelectorAll('.hero, .photo-item, .footer, .meme-section');
+                let currentSection = null;
+
+                allSections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    // Если верх элемента близко к верху экрана (с погрешностью)
+                    if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+                        currentSection = section;
+                    }
+                });
+
+                // Если нашли нужный блок — принудительно скроллим к нему
+                if (currentSection) {
+                    // Используем 'auto' (мгновенно), чтобы не было диких прыжков при анимации
+                    currentSection.scrollIntoView({ behavior: 'auto', block: 'center' });
+                }
+            }, 200); // Ждем 200мс, чтобы браузер успел перестроить интерфейс
         });
     </script>
 </body>
