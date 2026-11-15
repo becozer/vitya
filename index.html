@@ -8,284 +8,47 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: #050505; color: #ffffff; font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-        body {
-            background-color: #050505;
-            color: #ffffff;
-            font-family: 'Space Grotesk', sans-serif;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* --- ПЕРВЫЙ ЭКРАН (HERO) --- */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            z-index: 2;
-            overflow: hidden;
-            padding: 0 3vw;
-        }
-
-        .hero-content {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            will-change: transform, opacity, filter;
-            transition: transform 0.1s linear, opacity 0.1s linear, filter 0.1s linear;
-        }
-
-        .name-part {
-            font-family: 'Unbounded', sans-serif;
-            font-size: 13vw;
-            font-weight: 900;
-            line-height: 0.85;
-            text-transform: uppercase;
-            letter-spacing: -2px;
-            -webkit-text-stroke: 2px rgba(255, 255, 255, 0.7);
-            color: transparent;
-            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-            cursor: default;
-            white-space: nowrap;
-        }
-
+        /* --- ПЕРВЫЙ ЭКРАН --- */
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; z-index: 2; overflow: hidden; padding: 0 3vw; }
+        .hero-content { width: 100%; display: flex; flex-direction: column; justify-content: center; will-change: transform, opacity, filter; transition: transform 0.1s linear, opacity 0.1s linear, filter 0.1s linear; }
+        .name-part { font-family: 'Unbounded', sans-serif; font-size: 13vw; font-weight: 900; line-height: 0.85; text-transform: uppercase; letter-spacing: -2px; -webkit-text-stroke: 2px rgba(255, 255, 255, 0.7); color: transparent; transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); cursor: default; white-space: nowrap; }
         .name-part.first { align-self: flex-start; margin-left: -1vw; }
         .name-part.last { align-self: flex-end; margin-right: -1vw; margin-top: -2vw; }
-
-        .hero-content:hover .name-part {
-            -webkit-text-stroke: 2px #ffffff;
-            color: #ffffff;
-            text-shadow: 0 0 60px rgba(255, 255, 255, 0.3);
-        }
-
-        .date-block {
-            margin-top: 40px;
-            text-align: center;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(1rem, 2vw, 1.5rem);
-            font-weight: 500;
-            letter-spacing: 20px;
-            text-transform: uppercase;
-            color: #888;
-            margin-left: 20px;
-            animation: pulse 4s infinite alternate;
-        }
-
+        .hero-content:hover .name-part { -webkit-text-stroke: 2px #ffffff; color: #ffffff; text-shadow: 0 0 60px rgba(255, 255, 255, 0.3); }
+        .date-block { margin-top: 40px; text-align: center; font-family: 'Space Grotesk', sans-serif; font-size: clamp(1rem, 2vw, 1.5rem); font-weight: 500; letter-spacing: 20px; text-transform: uppercase; color: #888; margin-left: 20px; animation: pulse 4s infinite alternate; }
         @keyframes pulse { 0% { opacity: 0.5; } 100% { opacity: 1; } }
-
-        .scroll-line {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: 100px;
-            background: rgba(255, 255, 255, 0.1);
-            overflow: hidden;
-        }
-
-        .scroll-line::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 30%;
-            background: #fff;
-            animation: scrollDown 2s infinite cubic-bezier(0.77, 0, 0.175, 1);
-        }
-
-        @keyframes scrollDown {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(400%); }
-        }
+        .scroll-line { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); width: 2px; height: 100px; background: rgba(255, 255, 255, 0.1); overflow: hidden; }
+        .scroll-line::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 30%; background: #fff; animation: scrollDown 2s infinite cubic-bezier(0.77, 0, 0.175, 1); }
+        @keyframes scrollDown { 0% { transform: translateY(-100%); } 100% { transform: translateY(400%); } }
 
         /* --- ГАЛЕРЕЯ --- */
-        .gallery {
-            position: relative;
-            z-index: 2;
-            padding-bottom: 50px;
-        }
+        .gallery { position: relative; z-index: 2; padding-bottom: 50px; }
+        .photo-item { height: 100vh; display: flex; justify-content: center; align-items: center; padding: 3vh 3vw; position: relative; overflow: hidden; }
+        .photo-wrapper { width: 100%; height: 100%; max-width: 1600px; position: relative; border-radius: 4px; overflow: hidden; background-color: #111; transform: scale(0.85); opacity: 0; filter: blur(10px); transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); display: flex; justify-content: center; align-items: center; }
+        .photo-item.visible .photo-wrapper { transform: scale(1); opacity: 1; filter: blur(0); }
+        .photo-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.5s ease; }
+        .photo-wrapper img.vertical { object-fit: contain; background-color: #050505; }
+        .photo-item:hover .photo-wrapper img { transform: scale(1.03); }
+        .photo-number { position: absolute; top: 20px; right: 30px; font-family: 'Unbounded', sans-serif; font-size: 2rem; font-weight: 700; color: rgba(255, 255, 255, 0.4); z-index: 3; mix-blend-mode: overlay; letter-spacing: 2px; }
 
-        .photo-item {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 3vh 3vw;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .photo-wrapper {
-            width: 100%;
-            height: 100%;
-            max-width: 1600px;
-            position: relative;
-            border-radius: 4px;
-            overflow: hidden;
-            background-color: #111;
-            transform: scale(0.85);
-            opacity: 0;
-            filter: blur(10px);
-            transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-            display: flex; /* Помогает центрировать вертикальные фото */
-            justify-content: center;
-            align-items: center;
-        }
-
-        .photo-item.visible .photo-wrapper {
-            transform: scale(1);
-            opacity: 1;
-            filter: blur(0);
-        }
-
-        .photo-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Для горизонтальных - заполняет весь экран */
-            display: block;
-            transition: transform 1.5s ease;
-        }
-
-        /* Спец-класс для вертикальных фото, чтобы они вписывались целиком */
-        .photo-wrapper img.vertical {
-            object-fit: contain; 
-            background-color: #050505; /* Черный фон по бокам */
-        }
-
-        .photo-item:hover .photo-wrapper img {
-            transform: scale(1.03);
-        }
-
-        .photo-number {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            font-family: 'Unbounded', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            color: rgba(255, 255, 255, 0.4);
-            z-index: 3;
-            mix-blend-mode: overlay;
-            letter-spacing: 2px;
-        }
-
-        /* --- ФУТЕР (КНОПКА) --- */
-        .footer {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-            background: #050505;
-            position: relative;
-        }
-
-        .footer h2 {
-            font-family: 'Unbounded', sans-serif;
-            font-size: clamp(2rem, 6vw, 5rem);
-            text-transform: uppercase;
-            font-weight: 900;
-            letter-spacing: -1px;
-            margin-bottom: 60px;
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8);
-            color: transparent;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 25px 80px;
-            background: transparent;
-            color: #fff;
-            text-decoration: none;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 0;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #fff;
-            transform: scaleY(0);
-            transform-origin: bottom;
-            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-            z-index: -1;
-        }
-
+        /* --- ФУТЕР --- */
+        .footer { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; background: #050505; position: relative; }
+        .footer h2 { font-family: 'Unbounded', sans-serif; font-size: clamp(2rem, 6vw, 5rem); text-transform: uppercase; font-weight: 900; letter-spacing: -1px; margin-bottom: 60px; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8); color: transparent; }
+        .btn { display: inline-block; padding: 25px 80px; background: transparent; color: #fff; text-decoration: none; font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 0; position: relative; overflow: hidden; transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .btn::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #fff; transform: scaleY(0); transform-origin: bottom; transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); z-index: -1; }
         .btn:hover { color: #000; border-color: #fff; }
         .btn:hover::before { transform: scaleY(1); }
 
         /* --- СЕКРЕТНЫЙ МЕМ (P.S.) --- */
-        .meme-section {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            background: #000;
-            padding: 5vh 5vw;
-        }
-
-        .meme-bg {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.2; /* Приглушенный фон */
-            filter: blur(5px) grayscale(100%);
-            z-index: 1;
-            transition: opacity 1s ease, filter 1s ease;
-        }
-
-        .meme-section.visible .meme-bg {
-            opacity: 0.6; /* Проявляется при скролле */
-            filter: blur(0px) grayscale(100%);
-        }
-
-        .meme-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-        }
-
-        .meme-content h2 {
-            font-family: 'Unbounded', sans-serif;
-            font-size: clamp(1.5rem, 4vw, 3rem);
-            text-transform: uppercase;
-            font-weight: 900;
-            color: #fff;
-            text-shadow: 0 0 20px rgba(0,0,0,0.8);
-            margin-bottom: 20px;
-        }
-
-        .meme-content p {
-            font-size: clamp(1rem, 2vw, 1.5rem);
-            color: #ccc;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-        }
+        .meme-section { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; overflow: hidden; background: #000; padding: 5vh 5vw; }
+        .meme-bg { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%; object-fit: cover; opacity: 0.2; filter: blur(5px) grayscale(100%); z-index: 1; transition: opacity 1s ease, filter 1s ease; }
+        .meme-section.visible .meme-bg { opacity: 0.6; filter: blur(0px) grayscale(100%); }
+        .meme-content { position: relative; z-index: 2; text-align: center; }
+        .meme-content h2 { font-family: 'Unbounded', sans-serif; font-size: clamp(2rem, 5vw, 4rem); text-transform: uppercase; font-weight: 900; color: #fff; text-shadow: 0 0 20px rgba(0,0,0,0.8); margin-bottom: 20px; letter-spacing: -1px; }
+        .meme-content p { font-size: clamp(1.2rem, 3vw, 2rem); color: #fff; font-weight: 500; letter-spacing: 5px; text-transform: uppercase; text-shadow: 0 0 10px rgba(0,0,0,0.8); }
 
         @media (max-width: 768px) {
             .name-part { font-size: 15vw; }
@@ -310,630 +73,362 @@
         
         <!-- 1. ПЕРВАЯ (73) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">01</span>
-                <img src="photo-73.jpg" alt="Фото 73" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">01</span><img src="photo-73.jpg" alt="Фото 73" loading="lazy"></div>
         </div>
 
         <!-- 2. (1) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">02</span>
-                <img src="photo-1.jpg" alt="Фото 1" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">02</span><img src="photo-1.jpg" alt="Фото 1" loading="lazy"></div>
         </div>
 
-        <!-- 3. (2) -->
+        <!-- 3. (3) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">03</span>
-                <img src="photo-2.jpg" alt="Фото 2" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">03</span><img src="photo-3.jpg" alt="Фото 3" loading="lazy"></div>
         </div>
 
-        <!-- 4. (3) -->
+        <!-- 4. ВЕРТИКАЛЬНАЯ (4) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">04</span>
-                <img src="photo-3.jpg" alt="Фото 3" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">04</span><img src="photo-4.jpg" alt="Фото 4" class="vertical" loading="lazy"></div>
         </div>
 
-        <!-- 5. ВЕРТИКАЛЬНАЯ (4) -->
+        <!-- 5. (5) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">05</span>
-                <img src="photo-4.jpg" alt="Фото 4" class="vertical" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">05</span><img src="photo-5.jpg" alt="Фото 5" loading="lazy"></div>
         </div>
 
-        <!-- 6. (5) -->
+        <!-- 6. (9) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">06</span>
-                <img src="photo-5.jpg" alt="Фото 5" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">06</span><img src="photo-9.jpg" alt="Фото 9" loading="lazy"></div>
         </div>
 
-        <!-- 7. (6) -->
+        <!-- 7. (10) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">07</span>
-                <img src="photo-6.jpg" alt="Фото 6" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">07</span><img src="photo-10.jpg" alt="Фото 10" loading="lazy"></div>
         </div>
 
-        <!-- 8. (7) -->
+        <!-- 8. (11) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">08</span>
-                <img src="photo-7.jpg" alt="Фото 7" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">08</span><img src="photo-11.jpg" alt="Фото 11" loading="lazy"></div>
         </div>
 
-        <!-- 9. (8) -->
+        <!-- 9. ВЕРТИКАЛЬНАЯ (12) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">09</span>
-                <img src="photo-8.jpg" alt="Фото 8" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">09</span><img src="photo-12.jpg" alt="Фото 12" class="vertical" loading="lazy"></div>
         </div>
 
-        <!-- 10. (9) -->
+        <!-- 10. (13) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">10</span>
-                <img src="photo-9.jpg" alt="Фото 9" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">10</span><img src="photo-13.jpg" alt="Фото 13" loading="lazy"></div>
         </div>
 
-        <!-- 11. (10) -->
+        <!-- 11. (15) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">11</span>
-                <img src="photo-10.jpg" alt="Фото 10" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">11</span><img src="photo-15.jpg" alt="Фото 15" loading="lazy"></div>
         </div>
 
-        <!-- 12. (11) -->
+        <!-- 12. (16) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">12</span>
-                <img src="photo-11.jpg" alt="Фото 11" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">12</span><img src="photo-16.jpg" alt="Фото 16" loading="lazy"></div>
         </div>
 
-        <!-- 13. ВЕРТИКАЛЬНАЯ (12) -->
+        <!-- 13. (17) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">13</span>
-                <img src="photo-12.jpg" alt="Фото 12" class="vertical" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">13</span><img src="photo-17.jpg" alt="Фото 17" loading="lazy"></div>
         </div>
 
-        <!-- 14. (13) -->
+        <!-- 14. (18) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">14</span>
-                <img src="photo-13.jpg" alt="Фото 13" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">14</span><img src="photo-18.jpg" alt="Фото 18" loading="lazy"></div>
         </div>
 
-        <!-- 15. (14) -->
+        <!-- 15. (19) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">15</span>
-                <img src="photo-14.jpg" alt="Фото 14" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">15</span><img src="photo-19.jpg" alt="Фото 19" loading="lazy"></div>
         </div>
 
-        <!-- 16. (15) -->
+        <!-- 16. (20) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">16</span>
-                <img src="photo-15.jpg" alt="Фото 15" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">16</span><img src="photo-20.jpg" alt="Фото 20" loading="lazy"></div>
         </div>
 
-        <!-- 17. (16) -->
+        <!-- 17. (21) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">17</span>
-                <img src="photo-16.jpg" alt="Фото 16" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">17</span><img src="photo-21.jpg" alt="Фото 21" loading="lazy"></div>
         </div>
 
-        <!-- 18. (17) -->
+        <!-- 18. (23) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">18</span>
-                <img src="photo-17.jpg" alt="Фото 17" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">18</span><img src="photo-23.jpg" alt="Фото 23" loading="lazy"></div>
         </div>
 
-        <!-- 19. (18) -->
+        <!-- 19. (24) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">19</span>
-                <img src="photo-18.jpg" alt="Фото 18" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">19</span><img src="photo-24.jpg" alt="Фото 24" loading="lazy"></div>
         </div>
 
-        <!-- 20. (19) -->
+        <!-- 20. (25) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">20</span>
-                <img src="photo-19.jpg" alt="Фото 19" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">20</span><img src="photo-25.jpg" alt="Фото 25" loading="lazy"></div>
         </div>
 
-        <!-- 21. (20) -->
+        <!-- 21. (26) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">21</span>
-                <img src="photo-20.jpg" alt="Фото 20" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">21</span><img src="photo-26.jpg" alt="Фото 26" loading="lazy"></div>
         </div>
 
-        <!-- 22. (21) -->
+        <!-- 22. (27) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">22</span>
-                <img src="photo-21.jpg" alt="Фото 21" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">22</span><img src="photo-27.jpg" alt="Фото 27" loading="lazy"></div>
         </div>
 
-        <!-- 23. (23) -->
+        <!-- 23. (28) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">23</span>
-                <img src="photo-23.jpg" alt="Фото 23" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">23</span><img src="photo-28.jpg" alt="Фото 28" loading="lazy"></div>
         </div>
 
-        <!-- 24. (24) -->
+        <!-- 24. (29) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">24</span>
-                <img src="photo-24.jpg" alt="Фото 24" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">24</span><img src="photo-29.jpg" alt="Фото 29" loading="lazy"></div>
         </div>
 
-        <!-- 25. (25) -->
+        <!-- 25. (30) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">25</span>
-                <img src="photo-25.jpg" alt="Фото 25" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">25</span><img src="photo-30.jpg" alt="Фото 30" loading="lazy"></div>
         </div>
 
-        <!-- 26. (26) -->
+        <!-- 26. (31) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">26</span>
-                <img src="photo-26.jpg" alt="Фото 26" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">26</span><img src="photo-31.jpg" alt="Фото 31" loading="lazy"></div>
         </div>
 
-        <!-- 27. (27) -->
+        <!-- 27. (32) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">27</span>
-                <img src="photo-27.jpg" alt="Фото 27" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">27</span><img src="photo-32.jpg" alt="Фото 32" loading="lazy"></div>
         </div>
 
-        <!-- 28. (28) -->
+        <!-- 28. (34) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">28</span>
-                <img src="photo-28.jpg" alt="Фото 28" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">28</span><img src="photo-34.jpg" alt="Фото 34" loading="lazy"></div>
         </div>
 
-        <!-- 29. (29) -->
+        <!-- 29. (36) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">29</span>
-                <img src="photo-29.jpg" alt="Фото 29" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">29</span><img src="photo-36.jpg" alt="Фото 36" loading="lazy"></div>
         </div>
 
-        <!-- 30. (30) -->
+        <!-- 30. (37) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">30</span>
-                <img src="photo-30.jpg" alt="Фото 30" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">30</span><img src="photo-37.jpg" alt="Фото 37" loading="lazy"></div>
         </div>
 
-        <!-- 31. (31) -->
+        <!-- 31. (38) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">31</span>
-                <img src="photo-31.jpg" alt="Фото 31" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">31</span><img src="photo-38.jpg" alt="Фото 38" loading="lazy"></div>
         </div>
 
-        <!-- 32. (32) -->
+        <!-- 32. (39) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">32</span>
-                <img src="photo-32.jpg" alt="Фото 32" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">32</span><img src="photo-39.jpg" alt="Фото 39" loading="lazy"></div>
         </div>
 
-        <!-- 33. (34) -->
+        <!-- 33. (40) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">33</span>
-                <img src="photo-34.jpg" alt="Фото 34" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">33</span><img src="photo-40.jpg" alt="Фото 40" loading="lazy"></div>
         </div>
 
-        <!-- 34. (36) -->
+        <!-- 34. (41) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">34</span>
-                <img src="photo-36.jpg" alt="Фото 36" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">34</span><img src="photo-41.jpg" alt="Фото 41" loading="lazy"></div>
         </div>
 
-        <!-- 35. (37) -->
+        <!-- 35. (43) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">35</span>
-                <img src="photo-37.jpg" alt="Фото 37" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">35</span><img src="photo-43.jpg" alt="Фото 43" loading="lazy"></div>
         </div>
 
-        <!-- 36. (38) -->
+        <!-- 36. (44) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">36</span>
-                <img src="photo-38.jpg" alt="Фото 38" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">36</span><img src="photo-44.jpg" alt="Фото 44" loading="lazy"></div>
         </div>
 
-        <!-- 37. (39) -->
+        <!-- 37. (46) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">37</span>
-                <img src="photo-39.jpg" alt="Фото 39" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">37</span><img src="photo-46.jpg" alt="Фото 46" loading="lazy"></div>
         </div>
 
-        <!-- 38. (40) -->
+        <!-- 38. (48) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">38</span>
-                <img src="photo-40.jpg" alt="Фото 40" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">38</span><img src="photo-48.jpg" alt="Фото 48" loading="lazy"></div>
         </div>
 
-        <!-- 39. (41) -->
+        <!-- 39. (49) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">39</span>
-                <img src="photo-41.jpg" alt="Фото 41" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">39</span><img src="photo-49.jpg" alt="Фото 49" loading="lazy"></div>
         </div>
 
-        <!-- 40. (43) -->
+        <!-- 40. (50) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">40</span>
-                <img src="photo-43.jpg" alt="Фото 43" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">40</span><img src="photo-50.jpg" alt="Фото 50" loading="lazy"></div>
         </div>
 
-        <!-- 41. (44) -->
+        <!-- 41. (54) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">41</span>
-                <img src="photo-44.jpg" alt="Фото 44" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">41</span><img src="photo-54.jpg" alt="Фото 54" loading="lazy"></div>
         </div>
 
-        <!-- 42. (46) -->
+        <!-- 42. (56) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">42</span>
-                <img src="photo-46.jpg" alt="Фото 46" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">42</span><img src="photo-56.jpg" alt="Фото 56" loading="lazy"></div>
         </div>
 
-        <!-- 43. (48) -->
+        <!-- 43. (58) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">43</span>
-                <img src="photo-48.jpg" alt="Фото 48" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">43</span><img src="photo-58.jpg" alt="Фото 58" loading="lazy"></div>
         </div>
 
-        <!-- 44. (49) -->
+        <!-- 44. (59) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">44</span>
-                <img src="photo-49.jpg" alt="Фото 49" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">44</span><img src="photo-59.jpg" alt="Фото 59" loading="lazy"></div>
         </div>
 
-        <!-- 45. (50) -->
+        <!-- 45. (60) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">45</span>
-                <img src="photo-50.jpg" alt="Фото 50" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">45</span><img src="photo-60.jpg" alt="Фото 60" loading="lazy"></div>
         </div>
 
-        <!-- 46. (52) - Исключен, пойдет в мем в конце -->
-        
-        <!-- 46. (54) -->
+        <!-- 46. (61) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">46</span>
-                <img src="photo-54.jpg" alt="Фото 54" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">46</span><img src="photo-61.jpg" alt="Фото 61" loading="lazy"></div>
         </div>
 
-        <!-- 47. (56) -->
+        <!-- 47. ВЕРТИКАЛЬНАЯ (62) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">47</span>
-                <img src="photo-56.jpg" alt="Фото 56" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">47</span><img src="photo-62.jpg" alt="Фото 62" class="vertical" loading="lazy"></div>
         </div>
 
-        <!-- 48. (58) -->
+        <!-- 48. (64) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">48</span>
-                <img src="photo-58.jpg" alt="Фото 58" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">48</span><img src="photo-64.jpg" alt="Фото 64" loading="lazy"></div>
         </div>
 
-        <!-- 49. (59) -->
+        <!-- 49. (65) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">49</span>
-                <img src="photo-59.jpg" alt="Фото 59" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">49</span><img src="photo-65.jpg" alt="Фото 65" loading="lazy"></div>
         </div>
 
-        <!-- 50. (60) -->
+        <!-- 50. (66) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">50</span>
-                <img src="photo-60.jpg" alt="Фото 60" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">50</span><img src="photo-66.jpg" alt="Фото 66" loading="lazy"></div>
         </div>
 
-        <!-- 51. (61) -->
+        <!-- 51. (67) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">51</span>
-                <img src="photo-61.jpg" alt="Фото 61" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">51</span><img src="photo-67.jpg" alt="Фото 67" loading="lazy"></div>
         </div>
 
-        <!-- 52. ВЕРТИКАЛЬНАЯ (62) -->
+        <!-- 52. (68) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">52</span>
-                <img src="photo-62.jpg" alt="Фото 62" class="vertical" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">52</span><img src="photo-68.jpg" alt="Фото 68" loading="lazy"></div>
         </div>
 
-        <!-- 53. (64) -->
+        <!-- 53. (69) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">53</span>
-                <img src="photo-64.jpg" alt="Фото 64" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">53</span><img src="photo-69.jpg" alt="Фото 69" loading="lazy"></div>
         </div>
 
-        <!-- 54. (65) -->
+        <!-- 54. (70) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">54</span>
-                <img src="photo-65.jpg" alt="Фото 65" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">54</span><img src="photo-70.jpg" alt="Фото 70" loading="lazy"></div>
         </div>
 
-        <!-- 55. (66) -->
+        <!-- 55. ВЕРТИКАЛЬНАЯ (75) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">55</span>
-                <img src="photo-66.jpg" alt="Фото 66" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">55</span><img src="photo-75.jpg" alt="Фото 75" class="vertical" loading="lazy"></div>
         </div>
 
-        <!-- 56. (67) -->
+        <!-- 56. (76) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">56</span>
-                <img src="photo-67.jpg" alt="Фото 67" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">56</span><img src="photo-76.jpg" alt="Фото 76" loading="lazy"></div>
         </div>
 
-        <!-- 57. (68) -->
+        <!-- 57. (77) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">57</span>
-                <img src="photo-68.jpg" alt="Фото 68" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">57</span><img src="photo-77.jpg" alt="Фото 77" loading="lazy"></div>
         </div>
 
-        <!-- 58. (69) -->
+        <!-- 58. (78) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">58</span>
-                <img src="photo-69.jpg" alt="Фото 69" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">58</span><img src="photo-78.jpg" alt="Фото 78" loading="lazy"></div>
         </div>
 
-        <!-- 59. (70) -->
+        <!-- 59. (80) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">59</span>
-                <img src="photo-70.jpg" alt="Фото 70" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">59</span><img src="photo-80.jpg" alt="Фото 80" loading="lazy"></div>
         </div>
 
-        <!-- 60. (72) -->
+        <!-- 60. (82) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">60</span>
-                <img src="photo-72.jpg" alt="Фото 72" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">60</span><img src="photo-82.jpg" alt="Фото 82" loading="lazy"></div>
         </div>
 
-        <!-- 61. (73) - Исключен, стоит первым -->
-
-        <!-- 61. ВЕРТИКАЛЬНАЯ (75) -->
-        <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">61</span>
-                <img src="photo-75.jpg" alt="Фото 75" class="vertical" loading="lazy">
-            </div>
-        </div>
-
-        <!-- 62. (76) -->
-        <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">62</span>
-                <img src="photo-76.jpg" alt="Фото 76" loading="lazy">
-            </div>
-        </div>
-
-        <!-- 63. (77) -->
-        <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">63</span>
-                <img src="photo-77.jpg" alt="Фото 77" loading="lazy">
-            </div>
-        </div>
-
-        <!-- 64. (78) -->
-        <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">64</span>
-                <img src="photo-78.jpg" alt="Фото 78" loading="lazy">
-            </div>
-        </div>
-
-        <!-- 65. (80) -->
-        <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">65</span>
-                <img src="photo-80.jpg" alt="Фото 80" loading="lazy">
-            </div>
-        </div>
-
-        <!-- 66. (82) -->
-        <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">66</span>
-                <img src="photo-82.jpg" alt="Фото 82" loading="lazy">
-            </div>
-        </div>
-
-        <!-- 67. (83) -->
+        <!-- 61. (83) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">67</span>
-                <img src="photo-83.jpg" alt="Фото 83" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">61</span><img src="photo-83.jpg" alt="Фото 83" loading="lazy"></div>
         </div>
 
-        <!-- 68. (84) -->
+        <!-- 62. (84) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">68</span>
-                <img src="photo-84.jpg" alt="Фото 84" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">62</span><img src="photo-84.jpg" alt="Фото 84" loading="lazy"></div>
         </div>
 
-        <!-- 69. (85) -->
+        <!-- 63. (85) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">69</span>
-                <img src="photo-85.jpg" alt="Фото 85" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">63</span><img src="photo-85.jpg" alt="Фото 85" loading="lazy"></div>
         </div>
 
-        <!-- 70. (87) -->
+        <!-- 64. (87) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">70</span>
-                <img src="photo-87.jpg" alt="Фото 87" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">64</span><img src="photo-87.jpg" alt="Фото 87" loading="lazy"></div>
         </div>
 
-        <!-- 71. (88) -->
+        <!-- 65. (88) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">71</span>
-                <img src="photo-88.jpg" alt="Фото 88" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">65</span><img src="photo-88.jpg" alt="Фото 88" loading="lazy"></div>
         </div>
 
-        <!-- 72. (89) -->
+        <!-- 66. (89) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">72</span>
-                <img src="photo-89.jpg" alt="Фото 89" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">66</span><img src="photo-89.jpg" alt="Фото 89" loading="lazy"></div>
         </div>
 
-        <!-- 73. (91) - Последняя -->
+        <!-- 67. ПОСЛЕДНЯЯ В ГАЛЕРЕЕ (91) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">73</span>
-                <img src="photo-91.jpg" alt="Фото 91" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">67</span><img src="photo-91.jpg" alt="Фото 91" loading="lazy"></div>
         </div>
 
-        <!-- 74. (93) -->
+        <!-- 68. (93) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">74</span>
-                <img src="photo-93.jpg" alt="Фото 93" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">68</span><img src="photo-93.jpg" alt="Фото 93" loading="lazy"></div>
         </div>
 
-        <!-- 75. (94) -->
+        <!-- 69. (94) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">75</span>
-                <img src="photo-94.jpg" alt="Фото 94" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">69</span><img src="photo-94.jpg" alt="Фото 94" loading="lazy"></div>
         </div>
 
-        <!-- 76. (96) -->
+        <!-- 70. (96) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">76</span>
-                <img src="photo-96.jpg" alt="Фото 96" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">70</span><img src="photo-96.jpg" alt="Фото 96" loading="lazy"></div>
         </div>
 
-        <!-- 77. (98) -->
+        <!-- 71. (98) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">77</span>
-                <img src="photo-98.jpg" alt="Фото 98" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">71</span><img src="photo-98.jpg" alt="Фото 98" loading="lazy"></div>
         </div>
 
-        <!-- 78. (99) -->
+        <!-- 72. (99) -->
         <div class="photo-item">
-            <div class="photo-wrapper">
-                <span class="photo-number">78</span>
-                <img src="photo-99.jpg" alt="Фото 99" loading="lazy">
-            </div>
+            <div class="photo-wrapper"><span class="photo-number">72</span><img src="photo-99.jpg" alt="Фото 99" loading="lazy"></div>
         </div>
 
     </section>
@@ -947,10 +442,11 @@
 
     <!-- СЕКРЕТНЫЙ МЕМ (P.S.) с фото 52 -->
     <section class="meme-section">
+        <!-- Обрати внимание, я добавил 'vertical', так как 52-я фотка горизонтальная, но пусть лучше встанет по центру -->
         <img src="photo-52.jpg" class="meme-bg" alt="P.S. Мем">
         <div class="meme-content">
             <h2>P.S.</h2>
-            <p>С днем рождения, именинник!</p>
+            <p>С ДНЁМ РОЖДЕНИЯ!</p>
         </div>
     </section>
 
