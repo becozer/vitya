@@ -99,30 +99,34 @@
         .meme-content h2 { font-family: 'Unbounded', sans-serif; font-size: clamp(2rem, 5vw, 4rem); text-transform: uppercase; font-weight: 900; color: #fff; text-shadow: 0 0 20px rgba(0,0,0,0.8); margin-bottom: 20px; letter-spacing: -1px; }
         .meme-content p { font-size: clamp(1.2rem, 3vw, 2rem); color: #fff; font-weight: 500; letter-spacing: 5px; text-transform: uppercase; text-shadow: 0 0 10px rgba(0,0,0,0.8); }
 
-        /* --- МОБИЛЬНАЯ АДАПТАЦИЯ --- */
-        @media (max-width: 768px) {
+
+        /* --- МОБИЛЬНАЯ АДАПТАЦИЯ (ВЕРТИКАЛЬНЫЙ РЕЖИМ) --- */
+        @media (max-width: 768px) and (orientation: portrait) {
             .name-part { font-size: 14.5vw; letter-spacing: -1px; }
             .date-block { letter-spacing: 8px; margin-left: 8px; font-size: 0.8rem; }
             .go-btn { padding: 15px 40px; font-size: 1.2rem; margin-top: 40px; }
             .audio-toggle { top: 20px; right: 20px; width: 40px; height: 40px; }
             
-            /* Высота слайда 75% (мало черного, но фото крупные) */
-            .photo-item { 
-                height: 75vh; 
-                padding: 1vh 2vw; 
-            }
-            .gallery { 
-                padding-top: 20px; 
-                padding-bottom: 20px;
-            }
+            .photo-item { height: 75vh; padding: 1vh 2vw; }
+            .gallery { padding-top: 20px; padding-bottom: 20px; }
 
-            /* Возвращаем contain для ВСЕХ фото, чтобы они не обрезались! */
-            .photo-wrapper img { 
-                object-fit: contain; 
-                background-color: transparent; 
-            }
+            /* Вертикально — фотографии целиком */
+            .photo-wrapper img { object-fit: contain; background-color: transparent; }
             
             .photo-number { font-size: 1.5rem; top: 15px; right: 15px; }
+        }
+
+        /* --- МОБИЛЬНАЯ АДАПТАЦИЯ (ГОРИЗОНТАЛЬНЫЙ РЕЖИМ) --- */
+        @media (max-width: 900px) and (orientation: landscape) {
+            /* Горизонтально — на весь экран */
+            .photo-item { height: 100vh; padding: 0; }
+            .photo-wrapper img { object-fit: cover; }
+            .photo-wrapper img.vertical { object-fit: contain; } /* Вертикальные все равно вписываем */
+            .photo-number { font-size: 1.5rem; top: 15px; right: 15px; }
+            
+            /* Уменьшаем шрифт на первом экране в горизонте, чтобы влезало */
+            .name-part { font-size: 10vw; }
+            .hero-content { transform: scale(0.9); }
         }
     </style>
 </head>
