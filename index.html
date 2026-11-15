@@ -11,39 +11,19 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: #050505; color: #ffffff; font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-        /* --- ЗНАЧОК МУЗЫКИ (СПРАВА СВЕРХУ) --- */
+        /* --- ЗНАЧОК МУЗЫКИ --- */
         .audio-toggle {
-            position: fixed;
-            top: 30px;
-            right: 30px;
-            z-index: 1000;
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            opacity: 0; /* Скрыт до старта */
-            pointer-events: none;
+            position: fixed; top: 30px; right: 30px; z-index: 1000;
+            width: 50px; height: 50px;
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; transition: all 0.3s ease;
+            opacity: 0; pointer-events: none;
         }
-        .audio-toggle.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        .audio-toggle:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.1);
-        }
-        .audio-toggle svg {
-            width: 20px;
-            height: 20px;
-            fill: #fff;
-        }
+        .audio-toggle.active { opacity: 1; pointer-events: auto; }
+        .audio-toggle:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.1); }
+        .audio-toggle svg { width: 20px; height: 20px; fill: #fff; }
         .audio-toggle .icon-muted { display: none; }
         .audio-toggle.muted .icon-playing { display: none; }
         .audio-toggle.muted .icon-muted { display: block; }
@@ -51,36 +31,41 @@
         /* --- ПЕРВЫЙ ЭКРАН --- */
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; z-index: 2; overflow: hidden; padding: 0 3vw; }
         .hero-content { width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .name-wrapper { width: 100%; display: flex; flex-direction: column; }
-        .name-part { font-family: 'Unbounded', sans-serif; font-size: 13vw; font-weight: 900; line-height: 0.85; text-transform: uppercase; letter-spacing: -2px; -webkit-text-stroke: 2px rgba(255, 255, 255, 0.7); color: transparent; transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); cursor: default; white-space: nowrap; }
-        .name-part.first { align-self: flex-start; margin-left: -1vw; }
-        .name-part.last { align-self: flex-end; margin-right: -1vw; margin-top: -2vw; }
+        .name-wrapper { width: 100%; display: flex; flex-direction: column; align-items: center; }
+        
+        .name-part { 
+            font-family: 'Unbounded', sans-serif; 
+            font-size: 12vw; /* Чуть уменьшил для десктопа, чтобы точно влезало */
+            font-weight: 900; 
+            line-height: 0.9; 
+            text-transform: uppercase; 
+            letter-spacing: -1px; 
+            -webkit-text-stroke: 2px rgba(255, 255, 255, 0.7); 
+            color: transparent; 
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); 
+            cursor: default; 
+            white-space: nowrap;
+            text-align: center;
+        }
+        
+        /* Убираем сильное смещение на мобилках, чтобы не обрезалось */
+        .name-part.first { margin-bottom: -1vw; }
+        .name-part.last { margin-top: -1vw; }
+        
         .hero-content:hover .name-part { -webkit-text-stroke: 2px #ffffff; color: #ffffff; text-shadow: 0 0 60px rgba(255, 255, 255, 0.3); }
         
-        .date-block { margin-top: 30px; text-align: center; font-family: 'Space Grotesk', sans-serif; font-size: clamp(1rem, 2vw, 1.5rem); font-weight: 500; letter-spacing: 20px; text-transform: uppercase; color: #888; margin-left: 20px; }
+        .date-block { margin-top: 30px; text-align: center; font-family: 'Space Grotesk', sans-serif; font-size: clamp(0.8rem, 2vw, 1.5rem); font-weight: 500; letter-spacing: 15px; text-transform: uppercase; color: #888; margin-left: 15px; }
 
-        /* Кнопка ГОУ */
         .go-btn {
-            margin-top: 50px;
-            padding: 20px 60px;
-            background: #fff;
-            color: #000;
-            font-family: 'Unbounded', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
+            margin-top: 50px; padding: 20px 60px;
+            background: #fff; color: #000;
+            font-family: 'Unbounded', sans-serif; font-size: 1.5rem; font-weight: 900;
+            text-transform: uppercase; letter-spacing: 5px;
+            border: none; border-radius: 50px; cursor: pointer;
             transition: all 0.4s ease;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-            z-index: 10;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); z-index: 10;
         }
-        .go-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(255, 255, 255, 0.6);
-        }
+        .go-btn:hover { transform: scale(1.05); box-shadow: 0 0 40px rgba(255, 255, 255, 0.6); }
 
         .scroll-line { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); width: 2px; height: 100px; background: rgba(255, 255, 255, 0.1); overflow: hidden; opacity: 0; transition: opacity 1s; }
         .scroll-line.active { opacity: 1; }
@@ -92,8 +77,12 @@
         .photo-item { height: 100vh; display: flex; justify-content: center; align-items: center; padding: 3vh 3vw; position: relative; overflow: hidden; }
         .photo-wrapper { width: 100%; height: 100%; max-width: 1600px; position: relative; border-radius: 4px; overflow: hidden; background-color: #111; transform: scale(0.85); opacity: 0; filter: blur(10px); transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); display: flex; justify-content: center; align-items: center; }
         .photo-item.visible .photo-wrapper { transform: scale(1); opacity: 1; filter: blur(0); }
+        
+        /* Фото по умолчанию заполняют экран (десктоп) */
         .photo-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.5s ease; }
+        /* Вертикальные фото вписываются целиком с черным фоном */
         .photo-wrapper img.vertical { object-fit: contain; background-color: #050505; }
+        
         .photo-item:hover .photo-wrapper img { transform: scale(1.03); }
         .photo-number { position: absolute; top: 20px; right: 30px; font-family: 'Unbounded', sans-serif; font-size: 2rem; font-weight: 700; color: rgba(255, 255, 255, 0.4); z-index: 3; mix-blend-mode: overlay; letter-spacing: 2px; }
 
@@ -113,27 +102,32 @@
         .meme-content h2 { font-family: 'Unbounded', sans-serif; font-size: clamp(2rem, 5vw, 4rem); text-transform: uppercase; font-weight: 900; color: #fff; text-shadow: 0 0 20px rgba(0,0,0,0.8); margin-bottom: 20px; letter-spacing: -1px; }
         .meme-content p { font-size: clamp(1.2rem, 3vw, 2rem); color: #fff; font-weight: 500; letter-spacing: 5px; text-transform: uppercase; text-shadow: 0 0 10px rgba(0,0,0,0.8); }
 
+        /* --- МОБИЛЬНАЯ АДАПТАЦИЯ (ВСЁ, ЧТО НИЖЕ, РАБОТАЕТ ТОЛЬКО НА ТЕЛЕФОНАХ) --- */
         @media (max-width: 768px) {
-            .name-part { font-size: 15vw; }
-            .date-block { letter-spacing: 10px; margin-left: 10px; font-size: 0.9rem; }
-            .go-btn { padding: 15px 40px; font-size: 1.2rem; }
+            .name-part { font-size: 14.5vw; letter-spacing: -1px; }
+            .date-block { letter-spacing: 8px; margin-left: 8px; font-size: 0.8rem; }
+            .go-btn { padding: 15px 40px; font-size: 1.2rem; margin-top: 40px; }
             .audio-toggle { top: 20px; right: 20px; width: 40px; height: 40px; }
+            
+            /* НА ТЕЛЕФОНЕ ФОТО ВПИСЫВАЕМ ЦЕЛИКОМ, ЧТОБЫ НЕ ОБРЕЗАЛОСЬ */
+            .photo-wrapper img { object-fit: contain; background-color: #050505; }
+            /* И для горизонтальных, и для вертикальных ставим contain на телефоне */
+            .photo-wrapper img, .photo-wrapper img.vertical { object-fit: contain; }
+            
+            .photo-number { font-size: 1.5rem; top: 15px; right: 15px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Аудио и кнопка вкл/выкл -->
     <audio id="bgMusic" loop>
         <source src="music.mp3" type="audio/mpeg">
     </audio>
 
     <div class="audio-toggle" id="audioBtn" title="Включить/Выключить музыку">
-        <!-- Иконка звука ВКЛ -->
         <svg class="icon-playing" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
         </svg>
-        <!-- Иконка звука ВЫКЛ -->
         <svg class="icon-muted" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
         </svg>
@@ -148,7 +142,6 @@
             </div>
             <div class="date-block">13 — 14 / 11 / 26</div>
             
-            <!-- Кнопка старта -->
             <button class="go-btn" id="goBtn">ГОУ</button>
         </div>
         <div class="scroll-line" id="scrollLine"></div>
@@ -522,7 +515,6 @@
     <!-- Финальный экран -->
     <section class="footer">
         <h2>Все моменты здесь</h2>
-        <!-- Ссылка на Яндекс.Диск -->
         <a href="https://disk.yandex.ru/d/K-Npo42wlsG0SQ" class="btn" target="_blank">Яндекс.Диск</a>
     </section>
 
@@ -536,39 +528,22 @@
     </section>
 
     <script>
-        // 1. Логика запуска музыки и скролла
         const goBtn = document.getElementById('goBtn');
         const audio = document.getElementById('bgMusic');
         const audioBtn = document.getElementById('audioBtn');
         const scrollLine = document.getElementById('scrollLine');
-        const heroSection = document.getElementById('hero');
 
-        // Устанавливаем громкость на 50%
         audio.volume = 0.5;
 
-        // Нажатие на ГОУ
         goBtn.addEventListener('click', () => {
-            // Пытаемся включить музыку (браузеры разрешают это после клика)
             audio.play().catch(e => console.log("Ошибка воспроизведения:", e));
-            
-            // Показываем кнопку выключения звука
             audioBtn.classList.add('active');
-            
-            // Показываем стрелочку вниз
             scrollLine.classList.add('active');
-
-            // Плавно скроллим вниз к первой фотографии
-            window.scrollTo({
-                top: window.innerHeight, // Высота первого экрана
-                behavior: 'smooth'
-            });
-
-            // Скрываем кнопку ГОУ (чтобы не мешала)
+            window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
             goBtn.style.opacity = '0';
             goBtn.style.pointerEvents = 'none';
         });
 
-        // Кнопка вкл/выкл звука
         let isMuted = false;
         audioBtn.addEventListener('click', () => {
             if (isMuted) {
@@ -581,7 +556,6 @@
             isMuted = !isMuted;
         });
 
-        // 2. Анимация появления фото и мема при скролле
         const items = document.querySelectorAll('.photo-item, .meme-section');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -594,11 +568,9 @@
         }, { threshold: 0.2 });
         items.forEach(item => { observer.observe(item); });
 
-        // 3. Параллакс для заголовка
         window.addEventListener('scroll', () => {
             const scrollY = window.scrollY;
             const heroContent = document.querySelector('.hero-content');
-            
             if (scrollY < window.innerHeight) {
                 heroContent.style.transform = `translateY(${scrollY * 0.4}px) scale(${1 + scrollY * 0.0005})`;
                 heroContent.style.opacity = 1 - (scrollY / (window.innerHeight * 0.6));
